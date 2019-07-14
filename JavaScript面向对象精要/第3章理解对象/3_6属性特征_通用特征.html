@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // 有两个属性特征是数据和访问器属性都具有的
+    // 一个是[[Enumerable]]决定是否可以遍历该属性
+    // 一个是[[Configurable]]决定是否可配置
+    // 可使用Object.defineProperty()方法改变属性特征
+    var person1 = {
+      name: "yz"
+    }
+    Object.defineProperty(person1, "name", {
+      enumerable: false
+    })
+    console.log("name" in person1) // true
+    console.log(person1.propertyIsEnumerable("name")) // false
+
+    var properties = Object.keys(person1)
+    console.log(properties.length) // 0
+
+    Object.defineProperty(person1, "name", {
+      configurable: false
+    })
+
+    delete person1.name
+    console.log("name" in person1) // true
+    console.log(person1.name) // "yz"
+
+    Object.defineProperty(person1, "name", { // error
+      configurable: true
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // 属性有两种类型：数据属性和访问器属性
+    // 访问器属性不包含值而是定义了一个当属性被读取时调用的函数(称为getter)
+    // 和一个当属性被写入时调用的函数(称为setter)
+    var person1 = {
+      _name: "yz",
+      get name() {
+        console.log("Reading name")
+        return this._name
+      },
+      set name(value) {
+        console.log("Setting name to %s", value)
+        this._name = value
+      }
+    }
+    console.log(person1.name)
+    person1.name = "yznew"
+    console.log(person1.name)
+  </script>
+</body>
+</html>
