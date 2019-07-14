@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    var name = "yz"
+    var firstChar = name.charAt(0)
+    console.log(firstChar)
+    
+    // 原始封装类型
+    // 上述代码在执行时，实际上执行的是
+    // var name = "yz"
+    // var temp = new String (name)
+    // var firstChar = temp.charAt(0)
+    // temp = null
+    // console.log(firstChar)
+
+    var name = "yz"
+    var name_ = new String ("yz") // 手动创建原始封装类型，避免这样做
+    var count = 10
+    var count_ = new Number(10)
+    var found = false
+    var found_ = new Boolean(false)
+
+    console.log(typeof name) // string
+    console.log(name instanceof String) // flase
+    console.log(typeof name_) // object
+    console.log(name_ instanceof String) // true
+  </script>
+</body>
+</html>
