@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  <script tepe="text/javascript">
-    function sayNameForAll(label) {
-      console.log(label + ":" + this.name)
-    }
-    var person1 = {
-      name: "yz1"
-    }
-    var person2 = {
-      name: "yz2"
-    }
-    var name = "yz"
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script tepe="text/javascript">
+      function sayNameForAll(label) {
+        console.log(label + ":" + this.name);
+      }
+      var person1 = {
+        name: "yz1"
+      };
+      var person2 = {
+        name: "yz2"
+      };
+      var name = "yz";
 
-    var sayNameForPerson1 = sayNameForAll.bind(person1)
-    sayNameForPerson1("person1")
-    var sayNameForPerson2 = sayNameForAll.bind(person2,"person2")
-    sayNameForPerson2()
-    person2.sayName = sayNameForPerson1
-    person2.sayName("person2")
-  </script>
-</body>
+      var sayNameForPerson1 = sayNameForAll.bind(person1);
+      sayNameForPerson1("person1");
+      var sayNameForPerson2 = sayNameForAll.bind(person2, "person2");
+      sayNameForPerson2();
+      person2.sayName = sayNameForPerson1;
+      person2.sayName("person2");
+    </script>
+  </body>
 </html>
