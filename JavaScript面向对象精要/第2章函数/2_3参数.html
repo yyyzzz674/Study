@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // arguments
+      function reflect(value) {
+        return value
+      }
+      console.log(reflect("Hi!"))
+      console.log(reflect("Hi!", 25))
+      console.log(reflect.length)
+
+      reflect = function() {
+        return arguments[0]
+      }
+
+      // 因为无法预知参数，尽量避免使用arguments，
+      // 但在某些情况下（接受任意数量的参数时，并求和），使用arguments更好
+
+      function sum() {
+        var result = 0,
+          i = 0,
+          len = arguments.length
+        while (i < len) {
+          result += arguments[i]
+          i++
+        }
+        return result
+      }
+      console.log(sum(1, 2))
+      console.log(sum(3, 4, 5, 6))
+      console.log(sum())
+          len = arguments.length;
+        while (i < len) {
+          result += arguments[i];
+          i++;
+        }
+        return result;
+      }
+    </script>
+  </body>
+</html>
