@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var person1 = {}
+      Object.defineProperties(person1, {
+        _name: {
+          value: "yz",
+          enumerable: true,
+          configutable: true,
+          writable: true
+        },
+        name: {
+          get: function() {
+            console.log("yz get")
+            return this._name
+          },
+          set function(value) {
+            consoe.log("yz set")
+            this._name = value
+          },
+          enumerable: true,
+          configurable: true
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 访问器属性两个额外特征 [[Get]] [[Set]] 内含getter和setter函数
+      // 创建一个同时具有数据特征和访问器特征的属性，将会得到一个错误
+
+      var person1 = {
+        _name: "yz",
+        get name() {
+          console.log("yz get")
+          return this._name
+        },
+        set name(value) {
+          consoe.log("yz set")
+          this._name = value
+        }
+      }
+
+      //上面代码等同于
+      // var person1 = {
+      //   _name: "yz"
+      // }
+      // Object.defineProperty(person1, "name", {
+      //   get: function() {
+      //     console.log("yz get")
+      //     return this._name
+      //   },
+      //   set function(value) {
+      //     consoe.log("yz set")
+      //     this._name = value
+      //   },
+      //   enumerable: true,
+      //   configurable: true
+      // })
+
+      var person2 = {
+        _name: "yz2"
+      }
+      Object.defineProperty(person2, "name", {
+        get: function() {
+          console.log("yz get")
+          return this._name
+        }
+      })
+      console.log("name" in person2)
+      console.log(person2.propertyIsEnumerable("name"))
+
+      delete person2.name
+      console.log("name" in person2)
+
+      person2.name = "yz2"
+      console.log(person2.name)
+    </script>
+  </body>
+</html>

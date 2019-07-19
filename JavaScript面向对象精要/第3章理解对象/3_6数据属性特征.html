@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 数据属性额外拥有两个访问器属性不具备的特征
+      // [[Value]] 属性的值
+      // [[Writable]] 布尔 指示该属性是否可以写入
+      var person1 = {}
+      Object.defineProperty(person1, "name", {
+        value: "yz",
+        enumerable: true,
+        configutable: true,
+        writable: true
+      })
+      // 上面等同于
+      // var person1 = {
+      //   name: "yz"
+      // }
+
+      // 当使用Object.defineProperty()定义新的属性时,一定为所有的特征指定一个值
+      // 否则布尔型的特征会被默认设置为false
+
+      var person2 = {}
+      Object.defineProperty(person2, "name", {
+        value: "yz"
+      })
+
+      console.log("name" in person2)
+      console.log(person2.propertyIsEnumerable("name")) // false
+
+      delete person2.name
+      console.log("name" in person2)
+
+      person2.name = "yz2"
+      console.log(person2.name)
+    </script>
+  </body>
+</html>

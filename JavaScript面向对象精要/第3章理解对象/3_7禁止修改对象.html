@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // [[Extensible]] 布尔值 指明对象本身是否可以被修改
+      // 设置[[Extensible]]为false，就能禁止新属性的添加
+      // 有三种方法可以锁定对象
+
+      // 第一种 Object.preventExtensions()
+      var person1 = {
+        name: "yz"
+      }
+      console.log(Object.isExtensible(person1))
+      Object.preventExtensions(person1)
+      console.log(Object.isExtensible(person1))
+
+      person1.sayName = function() {
+        console.log(this.name)
+      }
+      console.log("sayName" in person1) // false
+
+      console.log("name" in person1)
+      delete person1.name
+      console.log("name" in person1)
+
+      console.log("------------------------------------------")
+
+      // 第二种 Object.seal()
+      var person2 = {
+        name: "yz2"
+      }
+      console.log(Object.isExtensible(person2))
+      console.log(Object.isSealed(person2))
+
+      Object.seal(person2)
+      console.log(Object.isExtensible(person2))
+      console.log(Object.isSealed(person2))
+
+      person2.sayName = function() {
+        console.log(this.name)
+      }
+
+      console.log("sayName" in person2) // false
+
+      person2.name = "yz2_"
+      console.log(person2.name) // yz2_
+      delete person2.name
+      console.log("name" in person2)
+      console.log(person2.name) // yz2_
+
+      var descriptor = Object.getOwnPropertyDescriptor(person2, "name")
+      console.log(descriptor.configurable)
+      console.log(descriptor.writable)
+
+      console.log("------------------------------------------")
+
+      // 第三种 Object.freeze()
+      var person3 = {
+        name: "yz3"
+      }
+      console.log(Object.isExtensible(person3))
+      console.log(Object.isSealed(person3))
+      console.log(Object.isFrozen(person3))
+
+      Object.freeze(person3)
+
+      console.log(Object.isExtensible(person3))
+      console.log(Object.isSealed(person3))
+      console.log(Object.isFrozen(person3))
+
+      person3.sayName = function() {
+        console.log(this.name)
+      }
+
+      console.log("sayName" in person3) // false
+
+      person3.name = "yz3_"
+
+      console.log(person3.name)
+      delete person3.name
+      console.log("name" in person3)
+      console.log(person3.name)
+
+      var descriptor = Object.getOwnPropertyDescriptor(person3, "name")
+      console.log(descriptor.configurable)
+      console.log(descriptor.writable)
+    </script>
+  </body>
+</html>
