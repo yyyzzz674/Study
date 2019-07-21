@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var book = {
+        title: "book"
+      }
+      console.log("title" in book) // true
+      console.log(book.hasOwnProperty("title")) // true
+      console.log("hasOwnProperty" in book) // true
+      console.log(book.hasOwnProperty("hasOwnProperty")) // false
+      console.log(Object.prototype.hasOwnProperty("hasOwnProperty")) //true
+
+      // 可以用以下的函数去鉴别一个属性是否是原始属性
+      function hasPrototypeProperty(object, name) {
+        return name in object && !object.hasOwnProperty(name)
+      }
+
+      console.log(hasPrototypeProperty(book, "title")) // false
+      console.log(hasPrototypeProperty(book, "hasOwnProperty")) // true
+    </script>
+  </body>
+</html>
