@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // [[Prototype]]属性只是包含了一个指向原型对象的指针
+      // 任何对原型对象的改变都立即反映到所有引用它的对象实例上
+      function Person(name) {
+        this.name = name
+      }
+      Person.prototype = {
+        construct: Person,
+        sayName: function() {
+          console.log(this.name)
+        },
+        toString: function() {
+          return "[Person" + this.name + "]"
+        }
+      }
+      var person1 = new Person("yz1")
+      var person2 = new Person("yz2")
+      console.log("sayHi" in person1) // false
+      console.log("sayHi" in person2) // false
+
+      Person.prototype.sayHi = function() {
+        console.log("Hi")
+      }
+      console.log("sayHi" in person1) // true
+      console.log("sayHi" in person2) // true
+
+      // 当你在一个对象上使用Object.seal()或Object.freeze()时，无法添加自有属性或改变冻结对象的自有属性
+      // 但任可以通过在原型对象上添加属性来扩展这些对象实例
+
+      Object.freeze(person1)
+
+      Person.prototype.sayHi_ = function() {
+        console.log("Hi_")
+      }
+      person1.sayHi_()
+      person2.sayHi_()
+
+      // [[Prototype]]属性是对象实例的自有属性，属性本身被冻结,但其指向的值(原型对象)并没有冻结
+    </script>
+  </body>
+</html>

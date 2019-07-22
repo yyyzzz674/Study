@@ -31,51 +31,8 @@
       // no effect - delete only works on own properties
       delete object.toString
       console.log(object.toString()) // "[object object]"
-
-      console.log("---------------------------------")
       // delete操作符仅对自由属性起作用，无法删除一个对象的原型属性
       // 无法给一个对象的原型属性赋值
-
-      function Person(name) {
-        this.name = name
-      }
-      Person.prototype = {
-        sayName: function() {
-          console.log(this.name)
-        },
-        toString: function() {
-          return "[Person" + this.name + "]"
-        }
-      }
-      var person1 = new Person("yz")
-      console.log(person1 instanceof Person) // true
-      console.log(person1.constructor === Person) // false
-      console.log(person1.constructor === Object) // true
-      // 使用对象字面形式改写原型对象改变了构造函数的属性
-      // 当使用对象字面形式改写原型对象Person.prototype时
-      // 其constructor属性将被置为泛用对象Object
-      console.log("---------------------------------")
-
-      function Person_(name) {
-        this.name = name
-      }
-      Person_.prototype = {
-        constructor: Person_,
-        sayName: function() {
-          console.log(this.name)
-        },
-        toString: function() {
-          return "[Person" + this.name + "]"
-        }
-      }
-      var person1_ = new Person_("yz")
-      var person2_ = new Person_("yz_")
-      console.log(person1_ instanceof Person_) // true
-      console.log(person1_.constructor === Person_) // true
-      console.log(person1_.constructor === Object) // false
-      console.log(person2_ instanceof Person_) // true
-      console.log(person2_.constructor === Person_) // true
-      console.log(person2_.constructor === Object) // false
     </script>
   </body>
 </html>
