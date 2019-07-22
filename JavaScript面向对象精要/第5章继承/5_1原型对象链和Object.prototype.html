@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 对象实例继承了原型对象的属性
+      // 所有对象都继承自Object.prototype,任何以对象字面形式定义的对象,其[[Prototype]]的值都设为Object.prototype
+      // 以下方法都是定义在Object.prototype上的
+      // hasOwnPropertype() 检查是否存在一个给定名字的自有属性
+      // propertyIsEnumerable() 检查一个自有属性是否可枚举
+      // isPrototypeOf() 检查一个对象是否是另一个对象的原型对象
+      // valueOf() 返回一个对象的值表达
+      // toString() 返回一个对象的字符串表达
+
+      // 不要修改内建对象的原型对象
+      Object.prototype.add = function(value) {
+        return this + value
+      }
+      // 添加Object.prototype.add()会导致所有对象都有了一个add()方法
+      var empty = {}
+      for (var property in empty) {
+        console.log(property) // add
+      }
+      // 一个空对象依然会输出"add"作为其属性
+      // 推荐在for-in循环中始终使用hasOwnProperty()
+      for (var property in empty) {
+        if (empty.hasOwnProperty(property)) {
+          console.log(property)
+        }
+      }
+      // 限制了for-in循环只能用于自有属性
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 调用父类的构造函数
+      function Rectangle(length, width) {
+        this.length = length
+        this.width = width
+      }
+      Rectangle.prototype.getArea = function() {
+        return this.length * this.width
+      }
+      Rectangle.prototype.toString = function() {
+        return "[Rectangle" + this.length + "x" + this.width + "]"
+      }
+      function Square(size) {
+        Rectangle.call(this, size, size)
+      }
+      Square.prototype = new Rectangle()
+
+      Square.prototype.constructor = Square
+      // Square.prototype = Object.create(Rectangle.prototype, {
+      //   constructor: {
+      //     value: Square,
+      //     enumerable: true,
+      //     configutable: true,
+      //     writable: true
+      //   }
+      // })
+
+      Square.prototype.toString = function() {
+        return "[Square" + this.length + "x" + this.width + "]"
+      }
+
+      var square = new Square(6)
+      console.log(square.length)
+      console.log(square.width)
+      console.log(square.getArea())
+    </script>
+  </body>
+</html>
