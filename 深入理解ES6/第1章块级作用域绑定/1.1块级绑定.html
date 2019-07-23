@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 块级声明
+      // let 变量声明 在同一作用域内不可重复声明一个已有标识符
+      var count = 30
+      // let count = 30 //Identifier 'count' has already been declared
+      // const 常量声明 常量必须在声明时初始化
+      const maxItems = 30
+      // const name // Missing initializer in const declaration
+
+      // 使用const声明对象
+      // const 声明会阻止对于变量绑定与变量自身值的修改
+      // 但并不会组织对变量成员的修改
+      const person = {
+        name: "yz"
+      }
+      person.name = "yz1"
+      // person = { // Assignment to constant variable
+      //   name: "yz2"
+      // }
+
+      // 暂时性死区
+      // 在变量或常量声明之前便引用该变量或常量
+    </script>
+  </body>
+</html>

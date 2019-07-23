@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 参考以下函数
+      var funcs = []
+      for (var i = 0; i < 10; i++) {
+        funcs.push(function() {
+          console.log(i)
+        })
+      }
+      funcs.forEach(function(func) {
+        func() // 10
+      })
+      // i在每次迭代中被共享，意味着循环内创建的那些函数都拥有对同一变量的引用
+      // 第一种改法
+      funcs = []
+      for (let i = 0; i < 10; i++) {
+        funcs.push(function() {
+          console.log(i)
+        })
+      }
+      funcs.forEach(function(func) {
+        func() // 0 1 2 ... 10
+      })
+      // 第二种改法 使用立即调用函数表达式IIFEs
+      funcs = []
+      for (var i = 0; i < 10; i++) {
+        funcs.push(
+          (function(value) {
+            return function() {
+              console.log(value)
+            }
+          })(i)
+        )
+      }
+      funcs.forEach(function(func) {
+        func() // 0 1 2 ... 10
+      })
+
+      // 另一个例子
+      funcs = []
+      var object = {
+        a: true,
+        b: true,
+        c: true
+      }
+      for (var key in object) {
+        funcs.push(function() {
+          console.log(key)
+        })
+      }
+      funcs.forEach(function(func) {
+        func() // c c c
+      })
+
+      funcs = []
+      for (const key in object) {
+        funcs.push(function() {
+          console.log(key)
+        })
+      }
+      funcs.forEach(function(func) {
+        func() // a b c
+      })
+    </script>
+  </body>
+</html>
