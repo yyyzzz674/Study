@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 一个对象在不改变原型对象链的情况下得到了另一个对象的属性叫做混入
+      function Mixin(reciver, supplier) {
+        for (var property in supplier) {
+          if (supplier.hasOwnProperty(property)) {
+            reciver[property] = supplier[property]
+          }
+        }
+      }
+      // 提供者的访问器属性会变成接收者的数据属性
+    </script>
+  </body>
+</html>

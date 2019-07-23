@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 模块模式是一种用于创建拥有私有数据的单件对象的模式
+      // 基本做法是使用立调函数表达(IIFE)来返回一个对象
+      var person = (function() {
+        var age = 25
+        return {
+          name: "yz",
+          getAge: function() {
+            return age
+          },
+          growOlder: function() {
+            age++
+          }
+        }
+      })()
+      // 也可以写成这样
+      // var person = function() {
+      //   var age = 25
+      //   function getAge() {
+      //     return age
+      //   }
+      //   function growOlder() {
+      //     age++
+      //   }
+      //   return {
+      //     name: "yz",
+      //     getAge: getAge,
+      //     growOlder: growOlder
+      //   }
+      // }
+      console.log(person.name) //yz
+      console.log(person.getAge()) // 25
+      person.age = 100
+      console.log(person.getAge()) // 25
+      person.growOlder()
+      console.log(person.getAge()) // 26
+    </script>
+  </body>
+</html>

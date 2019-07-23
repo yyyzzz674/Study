@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 构造函数中创建每个实例的私有数据
+      function Person(name) {
+        var age = 25
+        this.name = name
+        this.getAge = function() {
+          return age
+        }
+        this.growOlder = function() {
+          age++
+        }
+      }
+      var person = new Person("yz")
+      console.log(person.name) // yz
+      console.log(person.getAge()) // 25
+      person.age = 100
+      console.log(person.getAge()) // 25
+      person.growOlder()
+      console.log(person.getAge()) // 26
+    </script>
+  </body>
+</html>
