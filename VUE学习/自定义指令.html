@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app" class="demo">
+      <!-- 全局注册 -->
+      <input type="text" placeholder="我是全局自定义指令" />
+      <input type="text" placeholder="我是全局自定义指令" />
+      <input type="text" placeholder="我是局部自定义指令" v-focus_ />
+
+      <br />
+
+      <div id="hook-arguments-example" v-demo:foo.a.b="message"></div>
+
+      <br />
+
+      <div v-demo2:foo2="{ color: 'white', text: 'hello!' }"></div>
+    </div>
+  </body>
+  <script>
+    // 自定义场景
+    //     一个指令定义对象可以提供如下几个钩子函数 (均为可选)：
+
+    // bind：只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
+
+    // inserted：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。
+
+    // update：所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。
+    // 指令的值可能发生了改变，也可能没有。但是你可以通过比较更新前后的值来忽略不必要的模板更新 (详细的钩子函数参数见下)。
+
+    // componentUpdated：指令所在组件的 VNode 及其子 VNode 全部更新后调用。
+
+    // unbind：只调用一次，指令与元素解绑时调用。
+
+    // 钩子函数的参数 (即 el、binding、vnode 和 oldVnode)
+
+    // 自定义指令 场景:
+    // 场景：当你在阅览某网站的图片时，可能会由于图片资源比较大而加载
+    //  缓慢，需要消耗一小段时间来呈现到眼前，这个体验肯定是不太友好的
+    // （就像网站切换页面，有时候会加载资源比较慢，为了给用户较好的体
+    // 验，一般都会先出一个正在加载的友好提示页面），所以这个案例的功
+    // 能就是在图片资源还没加载出来时，先显示默认背景图，当图片资源真
+    // 正加载出来了之后，再把真实图片放置到对应的位置上并显示出来。
+  </script>
+  <script>
+    Vue.directive("focus", {
+      inserted: function(el) {
+        el.focus()
+      }
+    })
+    Vue.directive("demo", {
+      bind: function(el, binding, vnode) {
+        var s = JSON.stringify
+        el.innerHTML =
+          "name: " +
+          s(binding.name) +
+          "<br>" +
+          "value: " +
+          s(binding.value) +
+          "<br>" +
+          "expression: " +
+          s(binding.expression) +
+          "<br>" +
+          "argument: " +
+          s(binding.arg) +
+          "<br>" +
+          "modifiers: " +
+          s(binding.modifiers) +
+          "<br>" +
+          "vnode keys: " +
+          Object.keys(vnode).join(", ")
+      }
+    })
+    Vue.directive("demo2", function(el, binding) {
+      console.log(binding.value.color) // => "white"
+      console.log(binding.value.text) // => "hello!"
+    })
+    new Vue({
+      el: "#app",
+      data: {
+        message: "hello!"
+      },
+      directives: {
+        focus_: {
+          inserted: function(el) {
+            el.focus()
+          }
+        }
+      }
+    })
+  </script>
+</html>
