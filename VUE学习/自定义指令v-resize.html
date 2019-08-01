@@ -34,6 +34,7 @@
         window.removeEventListener("resize", callback, options)
         delete el._onResize
       }
+
       Vue.directive("resize", {
         inserted: insertedFn,
         unbind: unbindFn
