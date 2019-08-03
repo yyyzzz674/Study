@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 模板字符量的简单语法 反引号(``)
+      let message1 = `Hello World!`
+      console.log(message1)
+      console.log(typeof message1)
+      console.log(message1.length)
+      let message2 = `\`Hello\`World!`
+      console.log(message2)
+      console.log(message2.length)
+      let message3 = `Multiline
+      string`
+      console.log(message3)
+      console.log(message3.length) //22
+
+      let name = 'Nicholas',
+        message4 = `Hello.${name}`
+      console.log(message4)
+
+      // 标签化模板
+
+      let count = 10
+      let price = 0.25
+      let message = passthru`${count} item cost $${(count * price).toFixed(2)}.`
+      function passthru(literals, ...substitutions) {
+        console.log(literals)
+        console.log(substitutions)
+        let result = ''
+        for (let i = 0; i < substitutions.length; i++) {
+          result += literals[i]
+          result += substitutions[i]
+        }
+        result += literals[literals.length - 1]
+        return result
+      }
+
+      console.log(message)
+    </script>
+  </body>
+</html>
