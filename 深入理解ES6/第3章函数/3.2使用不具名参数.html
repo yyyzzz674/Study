@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 参数的默认值让函数在接受更少的参数时的行为更清楚
+      // 以下考虑更多参数的情况
+
+      let book = {
+        title: 'ES6',
+        author: 'Zakas',
+        year: 2005
+      }
+
+      function pick_ES5(object) {
+        console.log(arguments.length) // 3
+        let result = {}
+        for (let i = 1, len = arguments.length; i < len; i++) {
+          result[arguments[i]] = object[arguments[i]]
+        }
+        return result
+      }
+      console.log(pick_ES5.length) // 1 函数的length是具名参数(不包括带有默认值的参数)的长度
+      let bookData = pick_ES5(book, 'author', 'year')
+      console.log(bookData.author)
+      console.log(bookData.year)
+
+      console.log('---------------------------------------------------------')
+
+      // ES6中引入了剩余参数 由三个点(...)与一个紧跟着的具名参数指定
+      function pick(object, ...keys) {
+        console.log(keys.length) // 2
+        console.log(arguments.length) // 3
+        let result = {}
+        for (let i = 0, len = arguments.length; i < len; i++) {
+          result[arguments[i]] = object[arguments[i]]
+        }
+        return result
+      }
+      console.log(pick.length) // 1
+      bookData = pick(book, 'author', 'year')
+      console.log(bookData.author)
+      console.log(bookData.year)
+
+      console.log('---------------------------------------------------------')
+
+      // 剩余参数的限制条件
+      // 1 一个函数只能由一个剩余参数,并且它必须被放在最后
+      // funcion pick(object,...keys,last){}  无法工作
+      // 2 剩余参数不能再对象字面量的setter属性中使用
+      //  let object={
+      //   set name(...value)
+      //  }
+    </script>
+  </body>
+</html>
