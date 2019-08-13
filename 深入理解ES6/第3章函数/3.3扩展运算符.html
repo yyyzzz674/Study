@@ -6,5 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <script>
+      let values = [25, 50, 75, 100]
+      console.log(Math.max.apply(Math, values))
+      // Math.max()方法不允许传入数组,所以在ES5以及早期版本中,
+      // 需要手动实现从数组中遍历数组,或像这样使用apply()方法
+      console.log(Math.max(...values))
+      // 在ES6中可以利用展开运算符这样写
+      console.log(Math.max(...values, 120)) // 120
+    </script>
+  </body>
 </html>

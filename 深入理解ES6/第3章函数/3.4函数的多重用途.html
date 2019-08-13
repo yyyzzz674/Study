@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Person(name) {
+        this.name = name
+      }
+      var person = new Person('yz')
+      var notAPerson = Person('yz')
+      console.log(person)
+      console.log(notAPerson) // undefined
+      // JavaScript 函数有两个不同的内部方法:[[Call]和][[Construct]]
+      // 当通过new关键字调用Person时，执行的是[[Construct]]函数，创建一个新对象，执行函数体，将this绑定到该实例上
+      // 当不通过new调用时，执行[[Call]]函数，直接执行代码中的函数体
+
+      // 在ES5中，确定一个函数是否通过new关键字被调用，使用instanceof
+      function Book(name) {
+        if (this instanceof Book) {
+          this.name = name
+        } else {
+          throw new Error('必须通过new关键字来调用Book')
+        }
+      }
+
+      var book = new Book('yz')
+      // var notABook = Book('yz') // 抛出错误
+      var notABook = Book.call(book, 'yz') // 有效 输出undefined
+      console.log(notABook)
+
+      // 在ES6中函数引入了new.target这个原属性
+      // 当调用函数的[[Construct]]方法时，new.target被赋值为new操作符的目标
+      // 当调用函数的[[Call]]方法，new.target被赋值为undefined
+
+      function Car(name) {
+        console.log(new.target)
+        if (new.target !== 'undefined') {
+          this.name = name
+        } else {
+          throw new Error('必须通过new关键字来调用Cat')
+        }
+      }
+
+      var car = new Car('yz')
+      // var notACar = Car.call(car, 'yz') // 抛出错误
+
+      // 也可以检查new.target是否被某个特定构造函数所调用
+      function Cat(name) {
+        if (new.target === Cat) {
+          this.name = name
+        } else {
+          throw new Error('必须通过new关键字来调用Cat')
+        }
+      }
+      function AnotherCat(name) {
+        Cat.call(this, name)
+      }
+      var cat = new Cat('yz')
+      var anotherCat = new AnotherCat('yz') // 抛出错误
+    </script>
+  </body>
+</html>

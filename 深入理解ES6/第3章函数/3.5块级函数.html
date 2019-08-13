@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ES5的严格模式下，在代码块内部的函数声明会抛出错误
+      // ES6中代码块内部的函数声明被视为块级生命，并允许它在定义所在的代码块内部被访问
+      // ES6 严格模式下，块级函数会被提升到定义所在的代码块顶部
+      // 而在非严格模式下，块级函数会被提升到所在函数或全局环境的顶部
+      'use strict'
+      if (true) {
+        console.log(typeof doSomething)
+        function doSomething() {}
+        doSomething()
+      }
+      console.log(typeof doSomething) // 严格模式下 undefined 非严格模式下 function
+    </script>
+  </body>
+</html>
