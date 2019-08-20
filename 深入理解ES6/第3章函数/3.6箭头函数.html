@@ -6,5 +6,63 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <script>
+      // 箭头函数 =>
+      // 箭头函数没有 this、super、arguments、也没有new target,
+      // 这些值由所在的、最靠近的非箭头函数来决定
+      // 不能被new使用
+      // 没有原型
+      // 不能更改this
+      // 不允许重名的具名参数
+
+      // 创建立即调用函数表达式
+      let person = (name => {
+        return {
+          getName: () => name
+        }
+      })('yz')
+      console.log(person.getName())
+
+      console.log('-----------------------------------------------')
+
+      var PageHandler = {
+        id: '123456',
+        init: function() {
+          document.addEventListener(
+            'click',
+            function(event) {
+              this.doSomething(event.type) // 没有错误
+            }.bind(this),
+            false
+          )
+        },
+        init_arrow: function() {
+          document.addEventListener(
+            'click',
+            event => {
+              this.doSomething(event.type) // 没有错误
+            },
+            false
+          )
+        },
+        doSomething: function(type) {
+          console.log('Handling' + type + 'for' + this.id)
+        }
+      }
+      PageHandler.init_arrow()
+
+      console.log('-----------------------------------------------')
+
+      // 箭头函数可以访问包含它的函数的arguments对象
+      function createArrowFunctioReturningFirstArg() {
+        return () => arguments[0]
+      }
+      var arrowFunction = createArrowFunctioReturningFirstArg(5)
+      console.log(arrowFunction()) // 5
+
+      console.log('-----------------------------------------------')
+      // 对于箭头函数,仍然可以对箭头函数使用call、apply、bind方法
+    </script>
+  </body>
 </html>
