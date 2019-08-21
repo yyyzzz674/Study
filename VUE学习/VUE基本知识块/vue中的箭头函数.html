@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="example">
+      <p>Original message: "{{ message }}"</p>
+      <p>Original message: "{{ message + message_suffix }}"</p>
+      <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    </div>
+  </body>
+  <script>
+    // 在vue组件中,watch、computed、methods中的函数,
+    // 如果需要访问组件中的其他属性或事件,均不采用箭头函数的写法
+    // computed可以使用vm作为回调参数来调用,但均不建议这样写
+    // filters中不可访问实例中的其他属性或事件
+    var vm = new Vue({
+      el: '#example',
+      data: {
+        message: 'Hello',
+        message_modify: 'modified',
+        message_suffix: 'suffix'
+      },
+      watch: {
+        message() {
+          console.log(this)
+        }
+      },
+      computed: {
+        // 计算属性的 getter
+        reversedMessage(vm) {
+          // `this` 指向 vm 实例
+          return vm.message
+            .split('')
+            .reverse()
+            .join('')
+        }
+      },
+      methods: {
+        modifyMessage() {
+          console.log(this.message_modify)
+        }
+      },
+      created() {
+        this.modifyMessage()
+      }
+    })
+  </script>
+</html>

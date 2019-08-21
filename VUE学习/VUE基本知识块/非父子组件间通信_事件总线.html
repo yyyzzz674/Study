@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.js"></script>
+  </head>
+  <body>
+    <div id="app5">
+      组件A: <com-a></com-a><br />
+      组件B: <com-b></com-b>
+    </div>
+  </body>
+  <script>
+    var bus = new Vue()
+    Vue.component('com-a', {
+      template: '<input v-on:change="handleChange" v-model="msg"/>',
+      data() {
+        return {
+          msg: 'Hello Vue.js'
+        }
+      },
+      methods: {
+        handleChange() {
+          bus.$emit('a-change', this.msg)
+        }
+      },
+      created() {
+        var me = this
+        bus.$on('b-change', function(msg) {
+          me.msg = msg
+        })
+      },
+      beforeDestroy() {
+        bus.$off('b-change')
+      }
+    })
+    Vue.component('com-b', {
+      template: '<input v-on:change="handleChange" v-model="msg"/>',
+      data() {
+        return {
+          msg: 'Hello Vue.js'
+        }
+      },
+      methods: {
+        handleChange() {
+          bus.$emit('b-change', this.msg)
+        }
+      },
+      created() {
+        var me = this
+        bus.$on('a-change', function(msg) {
+          me.msg = msg
+        })
+      },
+      beforeDestroy() {
+        bus.$off('a-change')
+      }
+    })
+    var app5 = new Vue({
+      el: '#app5'
+    })
+  </script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.js"></script>
+  </head>
+  <body>
+    <div id="app6">
+      <button v-on:click="changeType">改变组件</button><br />
+      <component v-bind:is="currentComp"></component>
+    </div>
+  </body>
+  <script>
+    var app6 = new Vue({
+      el: '#app6',
+      data() {
+        return {
+          type: 'a'
+        }
+      },
+      computed: {
+        currentComp() {
+          return this.type === 'a' ? 'com-a' : 'com-b'
+        }
+      },
+      components: {
+        'com-a': {
+          template: '<h1>我是组件a</h1>'
+        },
+        'com-b': {
+          template: '<h1>我是组件b</h1>'
+        }
+      },
+      methods: {
+        changeType() {
+          this.type = this.type === 'a' ? 'b' : 'a'
+        }
+      }
+    })
+  </script>
+</html>

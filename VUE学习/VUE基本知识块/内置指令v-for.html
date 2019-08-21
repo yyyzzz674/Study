@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <style>
+    #app2 span {
+      animation: flip-in 1s 0s ease-in-out both;
+    }
+    @keyframes flip-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+  <body>
+    <div id="app2">
+      <span
+        v-for="(item, index) in name"
+        v-bind:style="{animationDelay: `${0.5 + index * 0.3}s`}"
+        >{{ item }}</span
+      >
+    </div>
+  </body>
+  <script>
+    var app2 = new Vue({
+      el: '#app2',
+      data() {
+        return {
+          name: 'yugasun'
+        }
+      }
+    })
+  </script>
+</html>

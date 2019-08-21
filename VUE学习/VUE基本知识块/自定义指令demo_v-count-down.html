@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app4">
+      <button v-on:click="startCount">开始倒计时</button>
+      <span v-count-down1="count" v-if="show" style="font-size:16px;">{{
+        count
+      }}</span>
+      <span v-count-down2 data-count="60" v-if="show" style="font-size:16px;">
+        60
+      </span>
+    </div>
+    <script>
+      var app4 = new Vue({
+        el: '#app4',
+        data() {
+          return {
+            show: false, // 是否显示倒计时
+            timer: null, // 定时器
+            count: 60 // 计时
+          }
+        },
+        methods: {
+          startCount: function() {
+            this.show = true
+          }
+        },
+        directives: {
+          'count-down1': {
+            bind: function(el, binding, vnode) {
+              // console.log(binding.value)
+              // console.log(binding.expression)
+              const _context = vnode.context
+              if (_context.timer) {
+                clearInterval(_context.timer)
+                _context.timer = null
+              }
+              // 大家可以推测下这里的 this 指什么？
+              _context.timer = setInterval(() => {
+                if (_context.count <= 0) {
+                  clearInterval(_context.timer)
+                  _context.timer = null
+                  _context.show = false
+                } else {
+                  _context.count--
+                }
+              }, 1000)
+            }
+          },
+          'count-down2': {
+            bind: function(el, binding, vnode) {
+              let count = parseInt(el.getAttribute('data-count'))
+              if (this.timer) {
+                clearInterval(this.timer)
+                this.timer = null
+              }
+              // 大家可以推测下这里的 this 指什么？
+              this.timer = setInterval(function() {
+                if (count <= 0) {
+                  clearInterval(this.timer)
+                  this.timer = null
+                } else {
+                  count--
+                  el.innerHTML = count
+                  el.setAttribute('data-count', count)
+                }
+              }, 1000)
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

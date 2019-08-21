@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app4">
+      当前输入内容：{{ text }}<br />
+      <com-input2 v-bind:text.sync="text"></com-input2>
+      <!-- 会被扩展为 -->
+      <!-- <com-input2 v-bind:text="text" v-on:update="val => text = val"/> -->
+    </div>
+  </body>
+  <script>
+    var app4 = new Vue({
+      el: '#app4',
+      data() {
+        return {
+          text: 'Hello Vue.js'
+        }
+      },
+      components: {
+        'com-input2': {
+          props: {
+            text: {
+              type: String,
+              default: '请输入'
+            }
+          },
+          template: '<input v-on:change="handleChange" v-model="msg"/>',
+          data() {
+            return {
+              msg: this.text
+            }
+          },
+          methods: {
+            handleChange(e) {
+              this.$emit('update:text', this.msg)
+            }
+          }
+        }
+      }
+    })
+  </script>
+</html>
