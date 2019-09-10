@@ -9,9 +9,57 @@
   <body>
     <script>
       //  Object.is()
+      // 此方法接受两个参数，并在二者的值相等时返回true,此时要求二者类型相同并且值也相等
       console.log(+0 == -0) // true
       console.log(+0 === -0) // true
       console.log(Object.is(+0, -0)) // false
+      console.log(NaN == NaN) // false
+      console.log(NaN === NaN) // false
+      console.log(Object.is(NaN, NaN)) // true
+      console.log(5 == 5) // true
+      console.log(5 == '5') // true
+      console.log(5 === 5) // true
+      console.log(5 === '5') // false
+      console.log(Object.is(5, 5)) // true
+      console.log(Object.is(5, '5')) // true
+
+      // Object.assign()
+      // 混入
+      function mixin(receiver, supplier) {
+        Object.keys(supplier).forEach(function(key) {
+          console.log(key)
+          receiver[key] = supplier[key]
+        })
+        return receiver
+      }
+
+      let person = {
+        name: 'yz',
+        gender: {
+          type: 'male'
+        }
+      }
+      let person1 = {}
+      mixin(person1, person)
+      person['gender']['type'] = 'female'
+      console.log({ person1 })
+
+      // Object.assign()方法接受任意数量的供应者，而接收者会按照供应者在参数中的顺序来依次接受他们的属性
+      // 这就意味着，可能会发生后来的供应者会覆盖之前供应者的属性
+
+      let receiver = {}
+      Object.assign(
+        receiver,
+        {
+          type: 'js',
+          name: 'file.js'
+        },
+        {
+          type: 'css'
+        }
+      )
+      console.log(receiver.type)
+      console.log(receiver.name)
     </script>
   </body>
 </html>

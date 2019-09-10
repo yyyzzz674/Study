@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Object.setProtoypeOf()
+      let person = {
+        prefix: 'person',
+        getGreeting() {
+          return 'Hello' + this.prefix
+        }
+      }
+      let dog = {
+        prefix: 'dog',
+        getGreeting() {
+          return 'Woof' + this.prefix
+        }
+      }
+
+      let friend = Object.create(person)
+      console.log(friend.getGreeting()) // Hello
+      console.log(Object.getPrototypeOf(friend) === person) // true
+
+      Object.setPrototypeOf(friend, dog)
+      console.log(friend.getGreeting()) // 'Woof'
+      console.log(Object.getPrototypeOf(friend) === dog) // true
+
+      console.log('----------------------------------------------------')
+
+      let friend_ = {
+        prefix: 'friend_',
+        getGreeting() {
+          // return Object.getPrototypeOf(this).getGreeting.call(this)
+          return super.getGreeting()
+        }
+      }
+
+      Object.setPrototypeOf(friend_, person)
+      console.log(friend_.getGreeting()) // Hello
+      console.log(Object.getPrototypeOf(friend_) === person) // true
+
+      Object.setPrototypeOf(friend_, dog)
+      console.log(friend_.getGreeting()) // 'Woof'
+      console.log(Object.getPrototypeOf(friend_) === dog) // true
+
+      console.log('----------------------------------------------------')
+
+      let relative = Object.create(friend_)
+      relative['prefix'] = 'relative'
+      console.log(relative.getGreeting())
+
+      console.log('----------------------------------------------------')
+
+      let relative_ = {
+        prefix: 'relative_',
+        getGreeting() {
+          return Object.getPrototypeOf(this).getGreeting.call(this)
+          //return super.getGreeting()
+        }
+      }
+      Object.setPrototypeOf(relative_, friend_)
+      console.log(relative_.getGreeting())
+    </script>
+  </body>
+</html>
