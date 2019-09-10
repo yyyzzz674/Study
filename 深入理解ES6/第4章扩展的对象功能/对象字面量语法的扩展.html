@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //  属性初始化器的速记法
+      let name = 'yz'
+      let age = 16
+      function createPerson(name, age) {
+        return {
+          name,
+          age
+        }
+      }
+      console.log(createPerson(name, age))
+      //  方法简写
+      let person = {
+        name: 'person',
+        sayName() {
+          console.log(name)
+        }
+      }
+      person.sayName()
+      //  需计算属性名
+      let suffix = ' name'
+      person = {
+        ['first' + suffix]: 'Nicholas',
+        ['last' + suffix]: 'Zakas'
+      }
+      console.log(person['first name']) // Nicholas
+    </script>
+  </body>
+</html>
