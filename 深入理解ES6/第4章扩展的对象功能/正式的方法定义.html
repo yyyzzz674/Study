@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ES6中方法是一个拥有[[HomeObject]]内部属性的函数,此内部属性指向该方法所属的对象
+      let person = {
+        prefix: ',person',
+        getGreeting() {
+          return 'Hello' + this.prefix
+        }
+      }
+      let friend = {
+        prefix: ',friend',
+        getGreeting() {
+          // return Object.getPrototypeOf(this).getGreeting.call(this)
+          return super.getGreeting()
+        }
+      }
+      Object.setPrototypeOf(friend, person)
+      console.log(friend.getGreeting())
+    </script>
+  </body>
+</html>
