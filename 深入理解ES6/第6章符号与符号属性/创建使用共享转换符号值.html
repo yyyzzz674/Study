@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let firstName = Symbol('first name')
+      console.log(typeof firstName)
+      let person = {}
+      person[firstName] = 'Nicholas'
+      console.log(person[firstName])
+      console.log(firstName)
+
+      console.log('----------------------------------------------------')
+
+      Object.defineProperty(person, firstName, { writable: false })
+      let lastName = Symbol('last name')
+      Object.defineProperties(person, {
+        [lastName]: {
+          value: 'Zakas',
+          writable: false
+        }
+      })
+
+      console.log(person[firstName])
+      console.log(person[lastName])
+
+      console.log('----------------------------------------------------')
+
+      //   Symbol.for创建共享符号值
+      let uid = Symbol.for('uid')
+      console.log(Symbol.keyFor(uid))
+      let uid2 = Symbol.for('uid')
+      console.log(Symbol.keyFor(uid2))
+      let uid3 = Symbol('uid')
+      console.log(Symbol.keyFor(uid3))
+
+      console.log('----------------------------------------------------')
+
+      // 符号类型在进行转换时非常不灵活，无法被转换为字符串值或数值
+      let desc = String(uid)
+      // let desc = uid + '' // Cannot convert a Symbol value to a string
+      console.log(desc)
+
+      // Object.keys() 返回检索对象的所有可枚举属性名称
+      // Object.getOwnPropertyNames() 返回所有属性名称而无视其是否可枚举
+      // 以上两个都不能返回符号类型的属性
+      // ES6中新增了Object.getOwnPropertySymbols() 返回检索对象的符号类型属性
+      let symbols = Object.getOwnPropertySymbols(person)
+      console.log(symbols.length)
+      console.log(symbols[0])
+      console.log(person[symbols[0]])
+    </script>
+  </body>
+</html>
