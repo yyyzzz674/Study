@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ES6定义了'知名符号'来代表js中的一些公共行为
+      // Symbol.hasInstance
+      // Symbol.isConcatSpreadable
+      // Symbol.iterator
+      // Symbol.match
+      // Symbol.replace
+      // Symbol.search
+      // Symbol.species
+      // Symbol.split
+      // Symbol.toPrimitive
+      // Symbol.toStringTag
+      // Symbol.unscopables
+      function MyObject() {}
+      Object.defineProperty(MyObject, Symbol.hasInstance, {
+        value: function(v) {
+          console.log(v)
+          return false
+        }
+      })
+
+      let obj = new MyObject()
+      console.log(obj instanceof MyObject)
+
+      function SpecialNumber() {}
+
+      Object.defineProperty(SpecialNumber, Symbol.hasInstance, {
+        value: function(v) {
+          console.log(v)
+          return v instanceof Number && (v >= 1 && v <= 100)
+        }
+      })
+
+      let two = new Number(2)
+      console.log(two instanceof SpecialNumber) // true
+      let zero = new Number(0)
+      console.log(zero instanceof SpecialNumber)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let node = {
+        type: 'Identifier',
+        name: 'foo',
+        loc: {
+          start: {
+            line: 1,
+            column: 1
+          },
+          end: {
+            line: 1,
+            column: 4
+          }
+        }
+      }
+      let type = 'a'
+      let name = 'b'
+      let value
+      // 解构赋值表达式的值为表达式右侧(在=之后)的值
+      function outputInfo(value) {
+        console.log(value === node)
+      }
+      outputInfo(({ type, name, value = true } = node))
+      console.log(type)
+      console.log(name)
+      console.log(value)
+
+      console.log('----------------------------------------------------')
+
+      // 赋值给不同的本地变量名
+      let {
+        type: localType,
+        name: localName,
+        value: localValue = 'value'
+      } = node
+      console.log(localType)
+      console.log(localName)
+      console.log(localValue)
+
+      console.log('----------------------------------------------------')
+
+      // 嵌套的对象解构
+      let {
+        loc: { start: localStart }
+      } = node
+      console.log(localStart.line)
+      console.log(localStart.column)
+    </script>
+  </body>
+</html>

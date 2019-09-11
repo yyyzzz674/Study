@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let map = new Map()
+      map.set('title', 'understanding ES6')
+      map.set('year', 2016)
+      console.log(map.get('title'))
+      console.log(map.get('year'))
+
+      let key1 = {},
+        key2 = {}
+      map.set(key1, 5)
+      map.set(key2, 42)
+      console.log(map.has(key1)) // true
+      console.log(map.get(key1))
+      console.log(map.get(key2))
+      map.delete(key2)
+      console.log(map.size) // 3
+      map.clear()
+      console.log(map.size) // 0
+
+      console.log('----------------------------------------------------')
+
+      let map1 = new Map([['name', 'y'], ['age', 19]])
+      console.log(map1.has('name'))
+      console.log(map1.get('name'))
+      console.log(map1.has('age'))
+      console.log(map1.get('age'))
+      console.log(map1.size) // 2
+
+      console.log('----------------------------------------------------')
+
+      map1.forEach((value, key, ownerMap) => {
+        console.log(key + ' ' + value)
+        console.log(ownerMap === map1)
+      })
+
+      console.log('----------------------------------------------------')
+
+      // 使用Weak Map
+      let weakmap = new WeakMap()
+      let object = {}
+      weakmap.set(object, 'original')
+      console.log(weakmap.get(object))
+      object = null
+      console.log(weakmap.get(object)) // undefined
+    </script>
+  </body>
+</html>

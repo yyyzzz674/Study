@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 在ES5中使用类似下面的模式创建几乎真正私有的数据
+      var person = (function() {
+        var privateData = {}
+        privateId = 0
+        function Person(name) {
+          Object.defineProperty(this, '_id', { value: privateId++ })
+          privateData[this._id] = {
+            name: name
+          }
+        }
+        Person.prototype.getName = function() {
+          return privateData[this._id].name
+        }
+        return Person
+      })()
+      // 此方式最大问题在于privateData中的数据永不会消失
+      // 在对象实例被销毁时没有任何方法可以获知该数据,privateData对象就将永远包含多余的数据
+      // 可使用weakmap解决这个问题
+      let person_=(function(){
+        let privateData = new WeakMap()
+        function Person(name){
+          privateData.set(this.{name:name})
+        }
+        person.prototype.getName=function(){
+          return privateData.get(this).name
+        }
+        return Person
+      }())
+      // 当关联的对象实例被销毁时,私有信息也会被同时销毁
+    </script>
+  </body>
+</html>

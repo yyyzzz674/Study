@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 传递参数给迭代器
+      function* createIterator() {
+        let first = yield 1
+
+        let second
+        try {
+          second = yield first + 2
+        } catch (ex) {
+          console.log(ex)
+          second = 100
+        }
+
+        yield second + 3
+
+        yield 500
+        return 400
+      }
+      let iterator = createIterator()
+      console.log(iterator.next().value)
+      console.log(iterator.next(4).value)
+      console.log(iterator.throw(new Error('Boom')).value)
+      console.log(iterator.next())
+      console.log(iterator.next())
+
+      console.log('----------------------------------------------------')
+
+      // 生成器委托
+
+      function* createNumberIterator() {
+        yield 1
+        yield 2
+        return 3
+      }
+      function* createColorIterator() {
+        yield 'red'
+        yield 'green'
+      }
+      function* createRepeatingIterator(count) {
+        for (let i = 0; i < count; i++) {
+          yield 'repeat'
+        }
+      }
+      function* createCombinedIterator() {
+        let result = yield* createNumberIterator()
+        yield result
+        yield* createRepeatingIterator(result)
+      }
+
+      iterator = createCombinedIterator()
+
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+
+      console.log('----------------------------------------------------')
+
+      function* createStringIterator() {
+        yield* 'abcd'
+      }
+      iterator = createStringIterator()
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+    </script>
+  </body>
+</html>

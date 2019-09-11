@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 集合的迭代器
+      // 数组、Map、与Set 这三种类型都拥有如下的迭代器
+      // entries(): 返回一个包含键值对的迭代器
+      // values(): 返回一个包含集合中的值的迭代器
+      // keys(): 返回一个包含集合中的键的迭代器
+      let colors = ['red', 'green', 'blue']
+      let tracking = new Set([1234, 5678, 9012])
+      let data = new Map()
+      data.set('title', 'Understanding ES6')
+      data.set('format', 'ebook')
+      for (let entry of colors.entries()) {
+        console.log(entry)
+      }
+      for (let entry of tracking.entries()) {
+        console.log(entry)
+      }
+      for (let entry of data.entries()) {
+        console.log(entry)
+      }
+
+      console.log('----------------------------------------------------')
+
+      for (let entry of colors.values()) {
+        console.log(entry)
+      }
+      for (let entry of tracking.values()) {
+        console.log(entry)
+      }
+      for (let entry of data.values()) {
+        console.log(entry)
+      }
+
+      console.log('----------------------------------------------------')
+
+      for (let entry of colors.keys()) {
+        console.log(entry)
+      }
+      for (let entry of tracking.keys()) {
+        console.log(entry)
+      }
+      for (let entry of data.keys()) {
+        console.log(entry)
+      }
+
+      console.log('----------------------------------------------------')
+
+      // 当未指定迭代器时,values()方法是数组与Set的默认迭代器,entries()方法是Map的默认迭代器
+      for (let entry of colors) {
+        console.log(entry)
+      }
+      for (let entry of tracking) {
+        console.log(entry)
+      }
+      for (let entry of data) {
+        console.log(entry)
+      }
+      for (let [key, value] of data) {
+        console.log(key + ' ' + value)
+      }
+
+      console.log('----------------------------------------------------')
+
+      // 字符串的迭代器
+
+      let message = 'A B'
+      for (let c of message) {
+        console.log(c)
+      }
+
+      console.log('----------------------------------------------------')
+
+      // NodeList的迭代器
+
+      let divs = document.getElementsByTagName('div')
+      for (let div of divs) {
+        console.log(div.id)
+      }
+
+      console.log('----------------------------------------------------')
+
+      // 扩展运算符与非数组的可迭代对象
+      let array = [...tracking]
+      console.log(array)
+      array = [...data]
+      console.log(array)
+    </script>
+  </body>
+</html>

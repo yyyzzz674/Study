@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let node = {
+        type: 'Identifier',
+        name: 'foo',
+        loc: {
+          start: {
+            line: 1,
+            column: 1
+          },
+          end: {
+            line: 1,
+            column: 4
+          }
+        },
+        range: [0, 3]
+      }
+      let {
+        loc: { start },
+        range: [startIndex]
+      } = node
+      console.log(start.line)
+      console.log(start.column)
+      console.log(startIndex)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 迭代器
+      function createIterator1(items) {
+        let i = 0
+        return {
+          next: function() {
+            let done = i >= items.length
+            let value = !done ? items[i++] : undefined
+            return {
+              done: done,
+              value: value
+            }
+          }
+        }
+      }
+
+      let iterator = createIterator1([1, 2, 3])
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+
+      console.log('----------------------------------------------------')
+
+      // 生成器
+      function* createIterator2() {
+        yield 1
+        yield 2
+        yield 3
+      }
+      iterator = createIterator2()
+      console.log(iterator.next().value)
+      console.log(iterator.next().value)
+      console.log(iterator.next().value)
+
+      console.log('----------------------------------------------------')
+
+      let createIterator3 = function*(...rest) {
+        for (let i = 0; i < rest.length; i++) {
+          yield rest[i]
+        }
+      }
+      iterator = createIterator3(1, 2, 3)
+      console.log(iterator.next().value)
+      console.log(iterator.next().value)
+      console.log(iterator.next().value)
+      console.log(iterator.next().value)
+
+      console.log('----------------------------------------------------')
+
+      // 生成器对象方法
+
+      let o = {
+        *createIterator(...items) {
+          for (let i = 0; i < items.length; i++) {
+            yield items[i]
+          }
+        }
+      }
+      iterator = o.createIterator(4, 5, 6, 7)
+
+      console.log('----------------------------------------------------')
+
+      // 所有的集合对象(数组、set与map)以及字符串都是可迭代对象，可迭代对象被设计用于for-of循环
+      let values = [1, 2, 3, 4]
+      for (let num of values) {
+        console.log(num)
+      }
+
+      console.log('----------------------------------------------------')
+
+      //访问默认迭代器
+      iterator = values[Symbol.iterator]()
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+      console.log(iterator.next())
+
+      console.log('----------------------------------------------------')
+
+      // 判断是否可迭代
+      function isIterable(object) {
+        return typeof object[Symbol.iterator] === 'function'
+      }
+      console.log(isIterable([1, 2, 3]))
+      console.log(isIterable('Hello'))
+      console.log(isIterable(new Map()))
+      console.log(isIterable(new Set()))
+      console.log(isIterable(new WeakMap())) // false
+      console.log(isIterable(new WeakSet())) // false
+
+      console.log('----------------------------------------------------')
+
+      let collection = {
+        items: [],
+        *[Symbol.iterator]() {
+          for (let item of this.items) {
+            yield item
+          }
+        }
+      }
+
+      collection.items.push('a')
+      collection.items.push('b')
+      collection.items.push('c')
+
+      for (let x of collection) {
+        console.log(x)
+      }
+    </script>
+  </body>
+</html>
