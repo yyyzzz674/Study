@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Array.of
+      // 等价于下面的函数
+      // function ArrayOf() {
+      //   return [].slice.call(arguments)
+      // }
+      let items = Array.of(1, 2)
+      console.log(items.length)
+      console.log(items[0])
+      console.log(items[1])
+
+      console.log('----------------------------------------------------')
+
+      items = Array.of(2)
+      console.log(items.length)
+      console.log(items[0])
+
+      console.log('----------------------------------------------------')
+
+      items = Array.of(2, '2')
+      console.log(items.length)
+      console.log(typeof items[0])
+      console.log(typeof items[1])
+
+      console.log('----------------------------------------------------')
+
+      // Array.from
+      // Array.from将两类对象转为真正的数组:类似数组的对象和可遍历的对象
+      // 常用于DOM操作返回的NodeList集合以及函数内部的arguments对象
+      let arrayLike = {
+        '0': 'a',
+        '1': 'b',
+        '2': 'c',
+        length: 3
+      }
+      let arr1 = [].slice.call(arrayLike)
+      console.log(arr1)
+      let arr2 = Array.from(arrayLike)
+      console.log(arr2)
+
+      console.log(Array.from('hello'))
+      console.log(Array.from(new Set(['a', 'b'])))
+      console.log(Array.from([1, 2, 3], x => x * 2)) // [2,4,6]
+
+      let helper = {
+        diff: 1,
+        add(value) {
+          return value + this.diff
+        }
+      }
+      console.log(Array.from([1, 2, 3], helper.add, helper))
+      console.log(Array.from({ length: 2 })) // [undefined,undefined]
+
+      let numbers = {
+        *[Symbol.iterator]() {
+          yield 3
+          yield 4
+          yield 5
+        }
+      }
+      console.log(Array.from(numbers, value => value + 1))
+    </script>
+  </body>
+</html>

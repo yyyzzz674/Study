@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // TODO:
+      let numbers = [1, 2, 3, 4, 5, 78, 90]
+      // find()与findIndex()查找满足特定条件的数组元素
+      // indexOf()与lastIndexOf()查找特定值
+      console.log(numbers.find(n => n > 33)) // 78
+      console.log(numbers.findIndex(n => n > 33)) // 5
+
+      console.log('----------------------------------------------------')
+
+      console.log([1, 2, 3, 4, 5, 78, 90].fill(1)) // [1, 1, 1, 1, 1, 1, 1]
+      console.log([1, 2, 3, 4, 5, 78, 90].fill(1, 5)) // [1, 2, 3, 4, 5, 1, 1]
+      console.log([1, 2, 3, 4, 5, 78, 90].fill(1, 5, 6)) // [1, 2, 3, 4, 5, 1, 90]
+
+      console.log('----------------------------------------------------')
+
+      console.log([1, 2, 3, 4, 5, 78, 90].copyWithin(3)) // [1, 2, 3, 1, 2, 3, 4]
+      console.log([1, 2, 3, 4, 5, 78, 90].copyWithin(2, 1)) // [1, 2, 2, 3, 4, 5, 78]
+      console.log([1, 2, 3, 4, 5, 78, 90].copyWithin(2, 0, 1)) // [1, 2, 1, 4, 3, 4, 5]
+
+      console.log('----------------------------------------------------')
+    </script>
+  </body>
+</html>
