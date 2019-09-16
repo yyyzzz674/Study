@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Proxy用于修改某些操作的默认行为
+      let target = {
+        name: 'target'
+      }
+      let proxy = new Proxy(target, {
+        set(trapTarget, key, value, receiver) {
+          if (!trapTarget.hasOwnProperty(key)) {
+            if (isNaN(value)) {
+              throw new TypeError('Property must be a number')
+            }
+          }
+          return Reflect.set(trapTarget, key, value, receiver)
+        }
+      })
+      proxy.count = 1
+      console.log(proxy.count)
+      console.log(target.count)
+      proxy.name = 'proxy'
+      console.log(proxy.name)
+      console.log(target.name)
+      proxy.anotherName = 'proxy'
+    </script>
+  </body>
+</html>

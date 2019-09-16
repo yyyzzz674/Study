@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 基本类声明
+      class PersonClass {
+        constructor(name) {
+          // PersonClass='abc' // 执行时抛出错误
+          this.name = name
+        }
+        sayName() {
+          console.log(this.name)
+        }
+      }
+
+      let person = new PersonClass('Nicholas')
+      person.sayName()
+      console.log(person instanceof PersonClass)
+      console.log(person instanceof Object)
+      console.log(typeof PersonClass) // function
+      console.log(typeof PersonClass.prototype.sayName) // function
+
+      // 类和自定义类型的区别
+      // 类声明不会被提升，在程序到达声明处之前，类会存在于暂时性死区内
+      // 类声明的所有代码会自动运行在严格模式下，且无法退出严格模式
+      // 类的所有方法都是不可枚举的
+      // 类的所有方法内部都没有[[Construct]],使用new来调用会抛出错误
+      // 调用类构造器时不适用new，会抛出错误
+      // 试图在类的方法内部重写类名，会抛出错误
+
+      console.log('----------------------------------------------------')
+
+      // 类的表达式
+      // 匿名类表达式
+      let PersonClass1 = class {
+        constructor(name) {
+          this.name = name
+        }
+        sayName() {
+          console.log(this.name)
+        }
+      }
+
+      let person1 = new PersonClass1('Nicholas')
+      person1.sayName()
+      console.log(person1 instanceof PersonClass1)
+      console.log(person1 instanceof Object)
+      console.log(typeof PersonClass1) // function
+      console.log(typeof PersonClass1.prototype.sayName) // function
+
+      console.log('----------------------------------------------------')
+
+      // 具名类表达式
+      // 此处的PersonClass2 只能在类内部使用
+      let PersonClass2_ = class PersonClass2 {
+        constructor(name) {
+          this.name = name
+        }
+        sayName() {
+          console.log(this.name)
+        }
+      }
+      console.log(typeof PersonClass2_) // function
+      console.log(typeof PersonClass2) // undefined
+
+      console.log('----------------------------------------------------')
+
+      // 类的使用
+      function createObject(classDef) {
+        return new classDef()
+      }
+      let obj = createObject(
+        class {
+          sayHi() {
+            console.log('Hi')
+          }
+        }
+      )
+      obj.sayHi()
+
+      person = new (class {
+        constructor(name) {
+          this.name = name
+        }
+        sayName() {
+          console.log(this.name)
+        }
+      })('Nicholas')
+      person.sayName()
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let methodName = 'html'
+      class CustomHIMLElement {
+        constructor(element) {
+          this.element = element
+        }
+        get [methodName]() {
+          return this.element.innerHTML
+        }
+        set [methodName](value) {
+          this.element.innerHTML = value
+        }
+      }
+      let descriptor = Object.getOwnPropertyDescriptor(
+        CustomHIMLElement.prototype,
+        methodName
+      )
+      console.log('get' in descriptor) // true
+      console.log('set' in descriptor) // true
+      console.log(descriptor.enumerable) // false
+    </script>
+  </body>
+</html>

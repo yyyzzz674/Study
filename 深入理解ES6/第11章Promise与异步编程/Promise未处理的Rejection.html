@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let rejected
+      let possiblyUnhandledRejections = new Map() // 追踪未处理Rejection
+      window.onunhandledrejection = event => {
+        console.log(event.type)
+        console.log(event.reason.message)
+        console.log(rejected === event.promise)
+        possiblyUnhandledRejections.set(event.promise, event.reason)
+      }
+      window.onrejectionhandled = event => {
+        console.log(event.type)
+        console.log(event.reason.message)
+        console.log(rejected === event.promise)
+        possiblyUnhandledRejections.delete(event.promise)
+      }
+      setInterval(() => {
+        possiblyUnhandledRejections.forEach((reason, promise) => {
+          console.log(reason.message ? reason.message : reason)
+          handleRejection(promise, reason) // 处理未处理的Rejection
+        })
+        possiblyUnhandledRejections.clear()
+      }, 60000)
+      rejected = Promise.reject(new Error('Explosion!'))
+      setTimeout(() => {
+        rejected.catch(value => {
+          console.log(value.message)
+        })
+      }, 1000)
+    </script>
+  </body>
+</html>

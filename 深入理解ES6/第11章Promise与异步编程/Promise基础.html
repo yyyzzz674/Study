@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Promise的声明周期
+      // 每一个Promise都会经历一个短暂的生命周期，初视为挂起态(pending)，也被认为是未决的(unsettled)
+      // 一旦异步操作结束，Promise就会被认为是已决的(settled)，并可能进入两种可能状态之一
+      // 已完成(fulfilled)，Promise的异步操作已成功结束
+      // 已拒绝(rejected)，Promise的异步操作未成功结束
+      // let p1 = new Promise((resolve, reject) => {
+      //   reject('resolved')
+      // })
+      // p1.catch(value => console.log(value))
+      // p1.then(
+      //   value => {
+      //     console.log(value + ' ' + 'p1 resolved')
+      //   },
+      //   err => {
+      //     console.log(err + ' ' + 'p1 rejected')
+      //   }
+      // )
+      // let p2 = new Promise((resolve, reject) => {
+      //   resolve(p1)
+      // })
+      // p2.then(
+      //   value => {
+      //     console.log(value + ' ' + 'p2 resolved')
+      //   },
+      //   err => {
+      //     console.log(err + ' ' + 'p2 rejected')
+      //   }
+      // )
+
+      let p1 = Promise.resolve(Promise.resolve(42))
+      p1.then(value => console.log(value))
+    </script>
+  </body>
+</html>
