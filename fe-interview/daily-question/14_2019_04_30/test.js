@@ -1,3 +1,9 @@
+/*
+ * @Author: yangzhuo
+ * @Date: 2019-09-17 10:42:21
+ * @Last Modified by: yangzhuo
+ * @Last Modified time: 2019-09-17 14:30:54
+ */
 // 关于闭包
 // 闭包的好处
 // 闭包可以隐藏变量以及防止变量被篡改和作用域的污染，从而实现封装
