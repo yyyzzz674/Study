@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="rect"></div>
+    <style>
+      .rect {
+        width: 0;
+        height: 0;
+        background-color: #fff;
+        border-width: 100px;
+        border-style: solid;
+        border-color: transparent rgb(34, 230, 220) transparent transparent;
+      }
+    </style>
+
+    <div id="blue"></div>
+    <style>
+      #blue {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-width: 0 100px 100px;
+        border-style: solid;
+        border-color: transparent transparent blue;
+      }
+      #blue:after {
+        content: '';
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 2px;
+        left: -96px;
+        border-width: 0 96px 96px;
+        border-style: solid;
+        border-color: transparent transparent yellow;
+      }
+    </style>
+  </body>
+</html>
