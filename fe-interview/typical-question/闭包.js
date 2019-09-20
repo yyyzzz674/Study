@@ -12,3 +12,7 @@ function myIndex() {
 }
 
 var foo = myIndex()
+a = foo()
+console.log(a === 1)
+b = foo()
+console.log(b === 2)
