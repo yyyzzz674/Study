@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script type="text/javascript" src="iscroll.js"></script>
+    <script type="text/javascript">
+      let myScroll
+      function loaded() {
+        myScroll = new IScroll('#wrap', {
+          scrollbars: true,
+          scrollX: true,
+          scrollY: false
+        })
+      }
+    </script>
+  </head>
+  <body onload="loaded()">
+    <div id="wrap" class="wrap">
+      <ul>
+        <li><img src="image/1.jpg" /></li>
+        <li><img src="image/1.jpg" /></li>
+        <li><img src="image/1.jpg" /></li>
+        <li><img src="image/1.jpg" /></li>
+      </ul>
+    </div>
+    <style>
+      .wrap {
+        width: 500px;
+        height: 400px;
+        position: relative;
+        overflow: hidden;
+      }
+      .wrap > ul {
+        position: absolute;
+        white-space: nowrap;
+      }
+      .wrap li {
+        display: inline-block;
+      }
+    </style>
+  </body>
+</html>
