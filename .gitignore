@@ -1,5 +1,8 @@
 .DS_Store
+
 node_modules
+package-lock.json
+
 *.log
 explorations
 TODOs.md
@@ -16,4 +19,5 @@ packages/vue-server-renderer/build.js
 packages/vue-server-renderer/server-plugin.js
 packages/vue-server-renderer/client-plugin.js
 packages/vue-template-compiler/build.js
+
 .vscode
