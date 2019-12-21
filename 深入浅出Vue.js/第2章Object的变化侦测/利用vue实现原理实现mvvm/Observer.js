@@ -4,6 +4,7 @@ function defineReactive(data, key, value) {
   Object.defineProperty(data, key, {
     get: function() {
       if (Dep.target) {
+        console.log('添加依赖')
         dep.addSub(Dep.target)
       }
       return value
