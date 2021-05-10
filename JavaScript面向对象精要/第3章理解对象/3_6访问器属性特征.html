@@ -12,13 +12,13 @@
       // 创建一个同时具有数据特征和访问器特征的属性，将会得到一个错误
 
       var person1 = {
-        _name: "yz",
+        _name: 'yz',
         get name() {
-          console.log("yz get")
+          console.log('yz get')
           return this._name
         },
         set name(value) {
-          consoe.log("yz set")
+          consoe.log('yz set')
           this._name = value
         }
       }
@@ -32,7 +32,7 @@
       //     console.log("yz get")
       //     return this._name
       //   },
-      //   set function(value) {
+      //   set: function(value) {
       //     consoe.log("yz set")
       //     this._name = value
       //   },
@@ -41,21 +41,22 @@
       // })
 
       var person2 = {
-        _name: "yz2"
+        _name: 'yz2'
       }
-      Object.defineProperty(person2, "name", {
-        get: function() {
-          console.log("yz get")
+      Object.defineProperty(person2, 'name', {
+        configurable: false, // 默认为false,不可删除
+        get: function () {
+          console.log('yz get')
           return this._name
         }
       })
-      console.log("name" in person2)
-      console.log(person2.propertyIsEnumerable("name"))
+      console.log('name' in person2)
+      console.log(person2.propertyIsEnumerable('name'))
 
-      delete person2.name
-      console.log("name" in person2)
+      console.log(delete person2.name)
+      console.log('name' in person2)
 
-      person2.name = "yz2"
+      person2.name = 'yz2'
       console.log(person2.name)
     </script>
   </body>
