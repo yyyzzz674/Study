@@ -1,7 +1,7 @@
 /*
  * @Author: zhuo
  * @Date: 2020-11-09 21:25:50
- * @LastEditTime: 2020-11-09 22:32:49
+ * @LastEditTime: 2020-11-23 19:49:19
  */
 
 // -----------------并行开始--------------------------
@@ -26,17 +26,17 @@
 
 // ---------------- 顺序开始---------------------------
 
-const getA = function() {
+const getA = function () {
   return new Promise((resolve, reject) => {
-    setTimeout(function() {
+    setTimeout(function () {
       resolve(2)
     }, 1000)
   })
 }
 
-const getB = function() {
+const getB = function () {
   return new Promise((resolve, reject) => {
-    setTimeout(function() {
+    setTimeout(function () {
       resolve(3)
     }, 1000)
   })
@@ -108,6 +108,10 @@ function addAB(a, b) {
 //     .then(data => console.log(data))
 // }
 
+/**
+ *
+ *
+ */
 function getResult() {
   const obj = []
   Promise.resolve()
