@@ -1,7 +1,7 @@
 /*
  * @Author: zhuo
  * @Date: 2021-09-07 13:03:06
- * @LastEditTime: 2021-09-08 13:20:14
+ * @LastEditTime: 2021-09-13 20:15:22
  */
 
 // 1.1 避免创建全局变量
@@ -93,4 +93,42 @@ a.checkEmail().checkName()
 
 console.log('--------------------------------------------------')
 
-// 1.9
+// 1.9 函数原型
+// 1.10 链式添加
+
+Function.prototype.addMethod = function (name, fn) {
+  this[name] = fn
+  return this
+}
+
+a = new Function() // a=function(){}
+a.addMethod('checkName', function () {
+  console.log('1.9 CheckObject checkName')
+  return this
+}).addMethod('checkEmail', function () {
+  console.log('1.9 CheckObject checkEmail')
+  return this
+})
+
+a.checkEmail().checkName()
+
+console.log('--------------------------------------------------')
+
+// 1.11 类式调用
+Function.prototype.addMethod = function (name, fn) {
+  this.prototype[name] = fn
+  return this
+}
+
+// 原型对象和new的区别
+let Methods = new Function() // Methods=function(){}
+Methods.addMethod('checkName', function () {
+  console.log('1.11 CheckObject checkName')
+  return this
+}).addMethod('checkEmail', function () {
+  console.log('1.11 CheckObject checkEmail')
+  return this
+})
+
+a = new Methods()
+a.checkEmail().checkName()
