@@ -1,7 +1,7 @@
 /*
  * @Author: zhuo
  * @Date: 2021-09-22 12:53:49
- * @LastEditTime: 2021-09-22 13:11:57
+ * @LastEditTime: 2021-09-28 13:12:10
  */
 function inheritObject(o) {
   // 声明一个过渡函数对象
@@ -18,7 +18,7 @@ let book = {
 }
 
 function createBook(obj) {
-  let o = new inheritObject(obj)
+  let o = inheritObject(obj)
   o.getName = function () {
     console.log(this.name)
   }
